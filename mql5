@@ -1,0 +1,139 @@
+mql5
+//+------------------------------------------------------------------+
+//|                                                 KeyLevelBreaker.mq5|
+//|                          Copyright 2021, Forex Robot Easy Team     |
+//|                              http://www.forexroboteasy.com          |
+//+------------------------------------------------------------------+
+#property copyright 'Copyright 2021, Forex Robot Easy Team'
+#property link      'http://www.forexroboteasy.com'
+
+//+------------------------------------------------------------------+
+//| Indicator input parameters                                      |
+//+------------------------------------------------------------------+
+input bool UseBreakerBlocks = true; // Enable/Disable breaker blocks
+input bool UseSupportResistance = true; // Enable/Disable support and resistance analysis
+input bool UseSignalGeneration = true; // Enable/Disable signal generation
+input bool UseHistoricalDataAnalysis = true; // Enable/Disable historical data analysis
+
+//+------------------------------------------------------------------+
+//| Global variables                                                 |
+//+------------------------------------------------------------------+
+datetime lastBarTime = 0; // Last analyzed bar time
+double lastHigh = 0; // Last analyzed high price
+double lastLow = 0; // Last analyzed low price
+double lastClose = 0; // Last analyzed close price
+
+//+------------------------------------------------------------------+
+//| Custom indicator initialization function                         |
+//+------------------------------------------------------------------+
+int OnInit()
+{
+    return(INIT_SUCCEEDED);
+}
+
+//+------------------------------------------------------------------+
+//| Custom indicator iteration function                              |
+//+------------------------------------------------------------------+
+int OnCalculate(const int rates_total,
+                const int prev_calculated,
+                const datetime &time[],
+                const double &open[],
+                const double &high[],
+                const double &low[],
+                const double &close[],
+                const long &tick_volume[],
+                const long &volume[],
+                const int &spread[])
+{
+    // Iterate through bars
+    for(int i = prev_calculated; i < rates_total; i++)
+    {
+        // Check if breaker blocks are enabled
+        if(UseBreakerBlocks)
+        {
+            // Generate breaker blocks
+            GenerateBreakerBlocks(i, high, low);
+        }
+
+        // Check if support and resistance analysis is enabled
+        if(UseSupportResistance)
+        {
+            // Analyze support and resistance levels
+            AnalyzeSupportResistance(i, high, low);
+        }
+
+        // Check if signal generation is enabled
+        if(UseSignalGeneration)
+        {
+            // Generate signals
+            GenerateSignals(i, high, low, close);
+        }
+
+        // Check if historical data analysis is enabled
+        if(UseHistoricalDataAnalysis)
+        {
+            // Analyze historical data
+            AnalyzeHistoricalData(i, high, low, close);
+        }
+    }
+
+    return(rates_total);
+}
+
+//+------------------------------------------------------------------+
+//| Function to generate breaker blocks                              |
+//+------------------------------------------------------------------+
+void GenerateBreakerBlocks(const int index,
+                           const double &high[],
+                           const double &low[])
+{
+    // TODO: Implement code to generate breaker blocks
+}
+
+//+------------------------------------------------------------------+
+//| Function to analyze support and resistance levels                 |
+//+------------------------------------------------------------------+
+void AnalyzeSupportResistance(const int index,
+                              const double &high[],
+                              const double &low[])
+{
+    // TODO: Implement code to analyze support and resistance levels
+}
+
+//+------------------------------------------------------------------+
+//| Function to generate trading signals                              |
+//+------------------------------------------------------------------+
+void GenerateSignals(const int index,
+                     const double &high[],
+                     const double &low[],
+                     const double &close[])
+{
+    // TODO: Implement code to generate trading signals
+}
+
+//+------------------------------------------------------------------+
+//| Function to analyze historical data                               |
+//+------------------------------------------------------------------+
+void AnalyzeHistoricalData(const int index,
+                           const double &high[],
+                           const double &low[],
+                           const double &close[])
+{
+    // TODO: Implement code to analyze historical data
+}
+
+//+------------------------------------------------------------------+
+//| Custom function to clean the charts                               |
+//+------------------------------------------------------------------+
+void CleanCharts()
+{
+    // TODO: Implement code to clean the charts
+}
+
+//+------------------------------------------------------------------+
+//| Custom function to handle the on/off button                       |
+//+------------------------------------------------------------------+
+void OnOffButton()
+{
+    // TODO: Implement code to handle the on/off button
+}
